@@ -20,11 +20,9 @@ app.get('/readability', cors(), (req, res) => {
       let iframeOptions = headers['x-frame-options']
       if (iframeOptions) {
         if (Array.isArray(iframeOptions)) {
-          console.log(iframeOptions);
           const deny = iframeOptions.find((x) =>
             x.toLowerCase() === 'deny' || x.toLowerCase() === 'sameorigin' || x.toLowerCase().includes('allow-from')
           )
-          console.log(deny);
           embeddable = !!!deny;
         }
       }
@@ -40,11 +38,8 @@ app.get('/readability', cors(), (req, res) => {
           embeddable: false
         }
       }
-      console.log('[1] Parsing html to DOM...');
 
       const dom = new JSDOM(text);
-
-      console.log('[2] Parsing DOM to readable article...');
       const article = new Readability(dom.window.document).parse();
 
       return {
@@ -55,14 +50,12 @@ app.get('/readability', cors(), (req, res) => {
       }
     })
     .then(obj => {
-      console.log('[3] Sending parsed obj...');
       return res.send(obj)
     })
     .catch(err => {
-      console.log('// Oops error...');
       console.error(err.stack);
       return res.send(err)
     });
 })
 
-app.listen(3001, () => console.log('Example app listening on port 3001!'))
+app.listen(3001, () => console.log('Listening on port 3001!'))

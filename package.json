@@ -1,7 +1,7 @@
 {
   "name": "readability-api",
   "version": "1.0.0",
-  "description": "returns readable string from an article",
+  "description": "Simple express app returns HTML content for browser reader's view",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
